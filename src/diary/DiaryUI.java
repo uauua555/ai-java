@@ -51,12 +51,12 @@ public class DiaryUI extends JFrame {
         JPanel buttonPanel = new JPanel(new FlowLayout(FlowLayout.CENTER, 15, 10));
         buttonPanel.setBackground(bgColor);
 
-        JButton saveBtn = createStyledButton("저장", accentColor);
+        JButton registerBtn = createStyledButton("등록", accentColor);
         JButton loadBtn = createStyledButton("전체 불러오기", new Color(80, 160, 120));
         JButton deleteBtn = createStyledButton("선택 삭제", new Color(200, 80, 80));
         JButton searchBtn = createStyledButton("검색", accentColor);
 
-        buttonPanel.add(saveBtn);
+        buttonPanel.add(registerBtn);
         buttonPanel.add(loadBtn);
         buttonPanel.add(deleteBtn);
         buttonPanel.add(searchBtn);
@@ -88,13 +88,16 @@ public class DiaryUI extends JFrame {
         }
 
         // 조립
+        JPanel centerPanel = new JPanel(new BorderLayout());
+        centerPanel.add(buttonPanel, BorderLayout.NORTH);
+        centerPanel.add(scrollPane, BorderLayout.CENTER);
+
         add(inputPanel, BorderLayout.NORTH);
-        add(buttonPanel, BorderLayout.CENTER);
-        add(scrollPane, BorderLayout.CENTER);  // 버튼 아래에 표시
+        add(centerPanel, BorderLayout.CENTER);
         add(imageLabel, BorderLayout.SOUTH);
 
         // 이벤트 연결
-        saveBtn.addActionListener(e -> saveEntry());
+        registerBtn.addActionListener(e -> saveEntry());
         loadBtn.addActionListener(e -> loadEntries());
         deleteBtn.addActionListener(e -> deleteSelectedEntry());
         searchBtn.addActionListener(e -> searchEntries());
@@ -103,7 +106,7 @@ public class DiaryUI extends JFrame {
     private JButton createStyledButton(String text, Color color) {
         JButton btn = new JButton(text);
         btn.setBackground(color);
-        btn.setForeground(Color.WHITE);
+        btn.setForeground(Color.BLACK);
         btn.setFocusPainted(false);
         btn.setFont(new Font("맑은 고딕", Font.BOLD, 14));
         return btn;
